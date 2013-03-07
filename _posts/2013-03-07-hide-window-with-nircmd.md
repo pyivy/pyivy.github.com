@@ -316,6 +316,8 @@ BOTH are short-circuit operator（短路运算符）.
 if x is false, then True, else False
 
 not has a lower priority than non-Boolean operators, so `not a == b` is interpreted as `not (a == b)`, and `a == not b` is a syntax error.
+
+全文完。
  
 
 
