@@ -85,11 +85,9 @@ NameError: name 'abc' is not defined
 
 查看 [Built-in Functions](http://docs.python.org/2/library/functions.html?highlight=input#built-in-functions) ，得知：
 
-{% highlight tex %}
-input([prompt])
 
-    Equivalent to eval(raw_input(prompt))
-{% endhighlight %}
+>input(\[prompt])
+>>Equivalent to eval(raw_input(prompt))
 
 input() 本质上还是使用 raw_input() 来实现的，只是调用完 raw_input() 之后再调用 eval() 函数，所以，你甚至可以将表达式作为 input() 的参数，并且它会计算表达式的值并返回它。
 
