@@ -252,6 +252,68 @@ Pi with three decimals: 3.142
 
 另外，[string](http://docs.python.org/2/library/string.html) 模块提供了更完整的[字符串格式化方案](http://docs.python.org/2/library/string.html#string-formatting)，可从这里的[例子](http://docs.python.org/2/library/string.html#format-examples)看起。
 
+#### 4. if 流程控制
+
+最常用的流程控制表达式，[官方例子](http://docs.python.org/2/tutorial/controlflow.html#if-statements)：
+
+{% highlight python%}
+>>> x = int(raw_input("Please enter an integer: "))
+Please enter an integer: 42
+>>> if x < 0:
+...      x = 0
+...      print 'Negative changed to zero'
+... elif x == 0:
+...      print 'Zero'
+... elif x == 1:
+...      print 'Single'
+... else:
+...      print 'More'
+...
+More
+{% endhighlight %}
+
+可以有 0 个 或者多个 elif 分支，else 是可选的：
+
+{% highlight python %}
+if_stmt ::=  "if" expression ":" suite
+             ( "elif" expression ":" suite )*
+             ["else" ":" suite]
+{% endhighlight %}
+
+#### 5. string 常用方法
+
+[官方参考手册](http://docs.python.org/2/library/stdtypes.html#string-methods)
+
+也可在控制台，输入：
+
+`dir('str')`
+
+查看常用方法。
+
+#### 6. 布尔操作符
+
+
+[参考这里](http://docs.python.org/2/library/stdtypes.html#boolean-operations-and-or-not)
+
+>x or y	
+
+if x is false, then y, else x
+
+it only evaluates the second argument if the first one is False.
+
+>x and y	
+
+if x is false, then x, else y
+
+it only evaluates the second argument if the first one is True.
+
+BOTH are short-circuit operator（短路运算符）.
+
+>not x	
+
+if x is false, then True, else False
+
+not has a lower priority than non-Boolean operators, so `not a == b` is interpreted as `not (a == b)`, and `a == not b` is a syntax error.
  
 
 
