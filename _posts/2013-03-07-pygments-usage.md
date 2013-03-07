@@ -2,7 +2,7 @@
 layout: post
 title: "Pygments Usage"
 description: ""
-category: 
+category: python
 tags: [pygments, python, pip, easy_install]
 ---
 {% include JB/setup %}
@@ -26,5 +26,15 @@ https://pypi.python.org/pypi/setuptools
 http://pythonhosted.org/distribute/easy_install.html
 
 easy_install is going to be deprecated ! use Pip !
+
+{% highlight java %}
+
+brew install python
+// export PATH="/usr/local/share/python:${PATH}"
+easy_install pip
+pip install --upgrade distribute
+pip install pygments
+{% endhighlight %}
+
 
 待续…
