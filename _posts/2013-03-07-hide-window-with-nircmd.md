@@ -3,7 +3,7 @@ layout: post
 title: "Hide Window with NirCmd"
 description: ""
 category: python
-tags: [nircmd]
+tags: [nircmd, os, sys, format, string, input]
 ---
 {% include JB/setup %}
 
