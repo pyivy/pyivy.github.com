@@ -103,141 +103,142 @@ input() 本质上还是使用 raw_input() 来实现的，只是调用完 raw_inp
 
 >格式标记字符串 % 要输出的值组
 
-转换类型表：
 
-<table border="1" style="margin:0px;padding:0px;border:1px solid #C0C0C0;color:#333333;background-color:#FFFFFF;">
-	<tbody>
+<table class="table table-bordered table-striped">
+<caption>转换类型表</caption>
+<thead>
 		<tr>
-			<th style="color:#000000;border:1px solid #C0C0C0;">
+			<th>
 				格式
 			</th>
-			<th style="color:#000000;border:1px solid #C0C0C0;">
+			<th>
 				描述
 			</th>
 		</tr>
-	</tbody>
+	</thead>
 	<tbody>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%%
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				百分号标记
 			</td>
 		</tr>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%c
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				字符及其ASCII码
 			</td>
 		</tr>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%s
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				字符串
 			</td>
 		</tr>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%d
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				有符号整数(十进制)
 			</td>
 		</tr>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%u
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				无符号整数(十进制)
 			</td>
 		</tr>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%o
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				无符号整数(八进制)
 			</td>
 		</tr>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%x
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				无符号整数(十六进制)
 			</td>
 		</tr>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%X
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				无符号整数(十六进制大写字符)
 			</td>
 		</tr>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%e
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				浮点数字(科学计数法)
 			</td>
 		</tr>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%E
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				浮点数字(科学计数法，用E代替e)
 			</td>
 		</tr>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%f
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				浮点数字(用小数点符号)
 			</td>
 		</tr>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%g
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				浮点数字(根据值的大小采用%e或%f)
 			</td>
 		</tr>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%G
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				浮点数字(类似于%g)
 			</td>
 		</tr>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%p
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				指针(用十六进制打印值的内存地址)
 			</td>
 		</tr>
 		<tr>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				%n
 			</td>
-			<td style="border:1px solid #C0C0C0;">
+			<td>
 				存储输出字符的数量放进参数列表的下一个变量中
 			</td>
 		</tr>
 	</tbody>
+
 </table>  
 
 
@@ -318,7 +319,6 @@ if x is false, then True, else False
 not has a lower priority than non-Boolean operators, so `not a == b` is interpreted as `not (a == b)`, and `a == not b` is a syntax error.
 
 全文完。
- 
 
 
 
