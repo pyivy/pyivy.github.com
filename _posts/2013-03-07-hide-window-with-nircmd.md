@@ -104,7 +104,7 @@ input() 本质上还是使用 raw_input() 来实现的，只是调用完 raw_inp
 >格式标记字符串 % 要输出的值组
 
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped table-hover">
 <caption>转换类型表</caption>
 <thead>
 		<tr>
