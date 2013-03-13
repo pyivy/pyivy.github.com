@@ -7,11 +7,14 @@ tags: [sae, sina]
 ---
 {% include JB/setup %}
 
-[入门文档](http://sae.sina.com.cn/?m=devcenter&catId=289)
+Python 是一门伟大的语言，Django 是一个杰出的框架，SAE 是非常优秀的环境，可惜我的代码写得不太好，文章也一般。
+
+[开发手册](http://sae.sina.com.cn/?m=devcenter&catId=304)
 
 [官方教程 Part 1](https://docs.djangoproject.com/en/1.4/intro/tutorial01/)
 [官方教程 Part 2](https://docs.djangoproject.com/en/1.4/intro/tutorial02/)
 [官方教程 Part 3](https://docs.djangoproject.com/en/1.4/intro/tutorial03/)
+[官方教程 Part 4](https://docs.djangoproject.com/en/1.4/intro/tutorial04/)
 
 ### Hello World
 
@@ -231,7 +234,7 @@ You just installed Django's auth system, which means you don't have any superuse
 Would you like to create one now? (yes/no): yes
 Username (leave blank to use 'christen'): 
 E-mail address: 84856@163.com
-Password: # pconline@sae
+Password: # zol#sae
 Password (again): 
 Superuser created successfully.
 Installing custom SQL ...
@@ -302,7 +305,7 @@ INSTALLED_APPS = (
 
 生成 SQL：
 
-`python manage.py sql polls`
+`$ python manage.py sql polls`
 
 
 {% highlight sql %}
@@ -329,7 +332,7 @@ COMMIT;
 
 与 Django 对话：
 
-`python manage.py shell`
+`$ python manage.py shell`
 
 测试 database API
 
@@ -345,7 +348,7 @@ p.save()
 Poll.objects.all() # [<Poll: Poll object>]
 {% endhighlight %}
 
-### Activate the admin site
+### Activate the Admin Site
 
 修改 olservice/urls.py
 
@@ -360,17 +363,17 @@ url(r'^admin/', include(admin.site.urls)),
 
 测试应用：
 
-`python manage.py runserver 3000`
+`$ python manage.py runserver 3000`
 
 访问：
 
 http://localhost:3000/admin/
 
-### Register Poll in thd admin
+### Register Poll in thd Admin
 
 在 polls 目录下创建  admin.py
 
-`touch admin.py`
+`$ touch admin.py`
 
 {% highlight python %}
 from polls.models import Poll
@@ -401,8 +404,8 @@ urlpatterns = patterns('',
 
     url(r'^polls/$', 'polls.views.index'),
     url(r'^polls/(?P<poll_id>\d+)/$', 'polls.views.detail'),
-    url(r'^polls/(?P<poll_id>\d+)/results/$', 'polls.views.results'),
-    url(r'^polls/(?P<poll_id>\d+)/vote/$', 'polls.views.vote'),
+    # url(r'^polls/(?P<poll_id>\d+)/results/$', 'polls.views.results'),
+    # url(r'^polls/(?P<poll_id>\d+)/vote/$', 'polls.views.vote'),
 
     # Uncomment the admin/doc line below to enable admin documentation:
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
@@ -435,6 +438,8 @@ D         static/admin
 D         static
 {% endhighlight %}
 
+未完...
+
 ----
 
 建议开发者使用 [SaeMySQL](http://apidoc.sinaapp.com/sae/SaeMysql.html) 操作数据库。
@@ -461,4 +466,4 @@ sae.const.MYSQL_PORT    # 端口，类型为，请根据框架要求自行转换
 sae.const.MYSQL_HOST_S  # 从库域名（只读）
 {% endhighlight%}
 
-在管理界面创建数据表，默认字符集为utf8，也可设为其他编码。 如果在本地开发环境建立的数据表，请确保使用utf8。在管理界面导入本地数据库时， 也可完成字符集的转换。
+在管理界面创建数据表，默认字符集为 utf8，也可设为其他编码。 如果在本地开发环境建立的数据表，请确保使用 utf8。在管理界面导入本地数据库时， 也可完成字符集的转换。
