@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "新浪 SAE Python 开发入门 TBC"
+title: "新浪 SAE Python 开发入门"
 description: "新浪 SAE Python 开发入门"
 category: sae
 tags: [sae, sina]
@@ -325,7 +325,6 @@ COMMIT;
 {% endhighlight %}
 
 
-
 再次同步数据库，为应用建表。
 
 ### Playing with the API
@@ -367,7 +366,7 @@ url(r'^admin/', include(admin.site.urls)),
 
 访问：
 
-http://localhost:3000/admin/
+[http://localhost:3000/admin/](http://localhost:3000/admin/)
 
 ### Register Poll in thd Admin
 
@@ -384,7 +383,11 @@ admin.site.register(Poll)
 
 再次访问应用，可对 Poll 进行 CRUD 。
 
-官方教程中还有进一步的优化指导。
+官方教程中还有进一步的优化指导：
+
+[自定义管理表单](https://docs.djangoproject.com/en/1.4/intro/tutorial02/#customize-the-admin-form)
+
+[添加关联对象](https://docs.djangoproject.com/en/1.4/intro/tutorial02/#adding-related-objects)
 
 ### Design your URLs
 
@@ -415,6 +418,12 @@ urlpatterns = patterns('',
 )
 {% endhighlight %}
 
+### Write your first view
+
+现在开始编写视图。
+
+启动应用，访问 [http://localhost:3001/polls/](http://localhost:3001/polls/)
+
 视图不存在的报错：
 
 {% highlight tex %}
@@ -424,27 +433,68 @@ Django Version:	1.4.3
 Exception Type:	ViewDoesNotExist
 {% endhighlight %}
 
-访问 docs
+技巧：配置 URL 访问 docs ，开发过程的得力帮助。
 
-删除样式
+Django 的文档很给力，只要你能沉住气，认真的读，不会有太大的障碍。
 
-{% highlight tex %}
-svn rm static/
+注：开发过程中，本地测试访问文档，一切正常，上传到 SAE 之后，因为未安装 [docutils](http://docutils.sf.net/)，无法访问。
 
-D         static/admin/css/base.css
-D         static/admin/css/dashboard.css
-D         static/admin/css
-D         static/admin
-D         static
+第一个视图，纯演示：
+
+编辑 polls/views.py
+
+{% highlight python %}
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the poll index.")
+    
+def detail(request, poll_id):
+    return HttpResponse("You're looking at poll %s." % poll_id)
+
+def results(request, poll_id):
+    return HttpResponse("You're looking at the results of poll %s." % poll_id)
+
+def vote(request, poll_id):
+    return HttpResponse("You're voting on poll %s." % poll_id)
 {% endhighlight %}
 
-未完...
+未实现任何数据逻辑，但结构清晰，目测比 Java 的 MVC 容易很多。
 
-----
+[官方文档](https://docs.djangoproject.com/en/1.4/intro/tutorial03/#write-views-that-actually-do-something)详细的介绍了如何真实 View 的编写，并使用了简单的模版。
 
-建议开发者使用 [SaeMySQL](http://apidoc.sinaapp.com/sae/SaeMysql.html) 操作数据库。
+### Raising 404 and 500
 
-如果您想自己实现数据库相关操作，可以使用以下常量：
+detail 方法用来展示 Poll，有过 Java 编程基础的人，不用理会文档的理论说明部分，直接看代码，很好理解。
+
+{% highlight python %}
+from django.http import Http404
+# ...
+def detail(request, poll_id):
+    try:
+        p = Poll.objects.get(pk=poll_id)
+    except Poll.DoesNotExist:
+        raise Http404
+    return render_to_response('polls/detail.html', {'poll': p})
+{% endhighlight %}
+
+Python 的异常处理，利益于语法的优势，非常干净。
+
+详细请看[这里](https://docs.djangoproject.com/en/1.4/intro/tutorial03/#raising-404)。
+
+Django 还为懒汉准备了 `get_object_or_404` 的快捷方法。
+
+404 和 500 错误，也需要自己的视图，依照约定，在 templates 目录下 创建 404.html 和 500.html 即可，可 **借鉴** Google 的样式，简单大方。
+
+### Simplifying the URLconfs
+
+[简化 URL 配置](https://docs.djangoproject.com/en/1.4/intro/tutorial03/#simplifying-the-urlconfs) 这一节，将各个不同模块的 URL 配置分开管理，这不仅仅是一种简化，随着项目的扩张，还有助日后的维护。
+
+项目进行到这里，接下来看教程的[第四部分](https://docs.djangoproject.com/en/1.4/intro/tutorial04/)，最后一步了，实现 `在线投票` 和 `结果展示`。
+
+本地调试正常之后，就可以上传到 SAE了，官方建议开发者使用 [SaeMySQL](http://apidoc.sinaapp.com/sae/SaeMysql.html) 操作数据库。
+
+常量如下：
 
 {% highlight tex%}
 用户名　 :  SAE_MYSQL_USER
@@ -454,6 +504,8 @@ D         static
 端　　口 :  SAE_MYSQL_PORT
 数据库名 :  SAE_MYSQL_DB
 {% endhighlight%}
+
+修发配置文件：
 
 {% highlight python%}
 import sae.const
@@ -466,4 +518,27 @@ sae.const.MYSQL_PORT    # 端口，类型为，请根据框架要求自行转换
 sae.const.MYSQL_HOST_S  # 从库域名（只读）
 {% endhighlight%}
 
-在管理界面创建数据表，默认字符集为 utf8，也可设为其他编码。 如果在本地开发环境建立的数据表，请确保使用 utf8。在管理界面导入本地数据库时， 也可完成字符集的转换。
+通过 phpMyAdmin 将本地数据导入到线上，测试就用。
+
+可能出现的问题：
+
+**管理后台无样式**
+
+解决方法：
+
+在根目录下添加 
+
+* static/admin/css
+* static/admin/img
+* static/admin/js 
+
+文件可以 django 的压缩包中找到。
+
+至此，一个粗糙的 SAE Django 应用就跑起来了，当然，外观很魔兽，如果你够执著，可用 [Twitter Bootstrap](http://twitter.github.com/bootstrap/) 美化一下。
+
+为了让页面看起来更加专业，写起来更容易维护，你也需要学习 Django 的模版知识。
+
+限于篇幅，这两个话题，我会另起文章 [Django 开发入门 搭建环境](http://www.pyivy.com/django/2013/03/11/django-a-blog-in-10-min/) 。
+
+全文完。
+
