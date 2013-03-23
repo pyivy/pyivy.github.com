@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "人生苦短 我也用Python"
-description: "编程语言中，从Java开始，我先后写过JavaScript，ActionScript，PHP，Ruby，甚至C#，蜻蜓点水，浅尝辄止，到最后，我只能说，我精通各大编程语言的Hello World，惭愧之至。"
+description: "<p>这句话，最初是谁说的，我已经无从考证。百度一下，找到相关结果约23,300个。</p><p>程序员中，也有很很多哲人，文人，让我辈仰望。</p><p>编程语言中，从Java开始，我先后写过JavaScript，ActionScript，PHP，Ruby，甚至C#，蜻蜓点水，浅尝辄止，到最后，我只能说，我精通各大编程语言的Hello World，惭愧之至。</p>"
 category: python
 tags: [python]
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Hide Window with NirCmd"
-description: ""
+description: "<p>有的时候，出于安全或者是其它方面的原因，我们需要隐藏某些窗口，这里贴出我写的一小段代码，借助了 NirCmd。</p><p>程序不怕小，小程序也有很多的拓展空间，基础从来都是重要的。</p><p>勿在浮沙筑高台。</p>"
 category: python
 tags: [nircmd, os, sys, format, string, input]
 ---

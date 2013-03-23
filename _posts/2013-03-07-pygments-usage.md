@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Pygments Usage TBC"
-description: ""
+description: "<p>Pygments Usage.</p>"
 category: python
 tags: [pygments, python, pip, easy_install]
 ---

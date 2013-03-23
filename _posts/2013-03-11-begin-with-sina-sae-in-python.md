@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "新浪 SAE Python 开发入门"
-description: "新浪 SAE Python 开发入门"
+description: "<p>Python 是一门伟大的语言，Django 是一个杰出的框架，SAE 是非常优秀的环境，可惜我的代码写得不太好，文章也一般。</p><p>本文是对照新浪官方文档和 Django 官方教程，一边搭建一边写的，中英混杂，很多地方没有翻译，主要是不想把时间浪费在这里，英文也很容易看懂的。之前多次起意做翻译，没一回能坚持下来，能看懂和能译为优雅的中文，还是很有差距的。</p><p>本教程的例子，是一个简单的在线投票，其实还有很多增强的空间。</p><p>关于Django，我会再写一篇不依赖于 SAE 的教程，重点关注数据设计和模版渲染。</p>"
 category: sae
 tags: [sae, sina]
 ---
@@ -495,17 +495,6 @@ Django 还为懒汉准备了 `get_object_or_404` 的快捷方法。
 本地调试正常之后，就可以上传到 SAE了，官方建议开发者使用 [SaeMySQL](http://apidoc.sinaapp.com/sae/SaeMysql.html) 操作数据库。
 
 常量如下：
-
-{% highlight tex%}
-用户名　 :  SAE_MYSQL_USER
-密　　码 :  SAE_MYSQL_PASS
-主库域名 :  SAE_MYSQL_HOST_M
-从库域名 :  SAE_MYSQL_HOST_S
-端　　口 :  SAE_MYSQL_PORT
-数据库名 :  SAE_MYSQL_DB
-{% endhighlight%}
-
-修发配置文件：
 
 {% highlight python%}
 import sae.const
