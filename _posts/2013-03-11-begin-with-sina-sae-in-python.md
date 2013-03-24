@@ -58,19 +58,19 @@ application = sae.create_wsgi_app(app)
 
 将前例代码 check 到本地：
 
-`$ svn co https://svn.sinaapp.com/olservice`
-
-`$ cd olservice`
-
-`$ django-admin.py startproject olservice`
+```
+$ svn co https://svn.sinaapp.com/olservice
+$ cd olservice`
+$ django-admin.py startproject olservice
+```
 
 将 olservice 目录下的所有文件拷贝到 1
 
-`$ rm -rf olservice`
-
-`$ cd 1`
-
-`$ vim config.yaml`
+```
+$ rm -rf olservice`
+$ cd 1
+$ vim config.yaml
+```
 
 添加以下内容：
 
@@ -93,9 +93,10 @@ from olservice import wsgi
 application = sae.create_wsgi_app(wsgi.application)
 {% endhighlight%}
 
-`$ svn add *`
-
-`$ svn ci -m 'add django support'`
+``` 
+$ svn add *
+$ svn ci -m 'add django support'
+```
 
 访问 [http://olservice.sinaapp.com/](http://olservice.sinaapp.com/)
 
