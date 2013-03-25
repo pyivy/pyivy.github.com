@@ -37,4 +37,10 @@ pip install pygments
 {% endhighlight %}
 
 
-待续…
+https://github.com/richleland/pygments-css
+
+https://github.com/github/albino
+
+http://stackoverflow.com/questions/14089633/why-the-linenos-option-fails-to-add-the-line-number-in-jekyll
+
+http://stackoverflow.com/questions/11093241/how-to-support-line-number-when-using-pygments-with-jekyll
