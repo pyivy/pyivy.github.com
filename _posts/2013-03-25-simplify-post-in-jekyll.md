@@ -77,12 +77,20 @@ OK，成功了，不过也仅限于此，时间有限，以后再研究。
 
 ```python
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 from datetime import date
 import os
 import re
+import sys
 
 u_title =  raw_input("Please ENTER the Title:\n")
 p_title = re.sub(r'\s+', '-', u_title.strip())
+
+# check len
+if len(p_title) < 2:
+	# raise Exception('Too Short!')
+	sys.exit('Too Short!')
 
 # post
 rakecmd = "rake post title=" + "'" + p_title + "'"
@@ -140,3 +148,22 @@ File has been Created:
 Done...
 ```
 终于可以少写几个字了，而且比默认的 rake 还有所增强，会自动去除标题中多余的空格！
+
+### 3月26日更新
+
+1、在文件第二行增加了 coding 定义 规范参见 [这里](http://www.python.org/dev/peps/pep-0263/)
+
+ To define a source code encoding, a magic comment must be placed into the source files either as first or second line in the file, such as:
+
+`# coding=<encoding name>`
+
+or (using formats recognized by popular editors):
+
+```python
+#!/usr/bin/python
+# -*- coding: <encoding name> -*-
+```
+
+2、增加了标题长度的判断，至少两个字符，用内置函数 [len(str)](http://docs.python.org/2.7/library/functions.html)
+
+3、如果用户输入不符合要求，程序退出，用 [sys.exit()](http://docs.python.org/2.7/library/sys.html?highlight=sys#sys.exit)
