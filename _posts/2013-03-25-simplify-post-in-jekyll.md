@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "简化 Jekyll 的文章编写"
+title: "用 Python 脚本简化 Jekyll 的文章编写"
 description: "<p>Jekyll 中一个典型的文章发布操作，要输入很长的命令，而且还有等于、引号，有点繁琐。看到网上有高手重写  Rakefile，但是我的 Ruby 水平，连打酱油都不够，更别说 rake 了。</p><p>后来尝试用 Python 脚本调用 Rake 命令，总算还可用。</p>"
 category: program
 tags: [rake, jekyll, python]
