@@ -154,5 +154,118 @@ Paul Irish 是著名的前端开发工程师，同时他也是 Chrome 开发者�
 
 * SSL功能，比如 Strict Transport Security 和 Public Key Pins
 
-让我们谈谈其中的2D图像部分： 根据port的不同，我们使用完全不同的库来处理图像到屏幕的绘制过程：
+让我们谈谈其中的 2D 图像部分： 根据 port 的不同，我们使用完全不同的库来处理图像到屏幕的绘制过程：
 
+![graphics context](/assets/images/2013/02/graphicscontext.png)
+
+更宏观一点来看，一个最近刚添加的功能：CSS.supports()在除了没有 css3 特性检测功能的 win 和 wincairo 这两个 port 之外，在其它所有 port 中都[可用](http://trac.webkit.org/changeset/142739)。
+
+现在到了卖弄学问的技术时间。上面讲的内容其实并不正确。事实上那是 WebCore 被共享的东西。而 WebCore 其实是当大家讨论 HTML 和 SVG 的布局、渲染和 DOM 处理时提到的 WebKit。技术上讲，WebKit 是 WebCore 和各种 ports 之间的绑定层，尽管通常来说这个差别并不那么重要。
+
+一个图表应该可以帮助大家理解：
+
+![webkit diagram](/assets/images/2013/02/webkit-diagram.png)
+
+WebKit 中的许多组件都是可以更换的（图中标灰色的部分）。
+
+举个例子来说，Webkit 的 JavaScript 引擎，JavaScriptCore，是 WebKit 的默认组件。（它最初是当 WebKit 从 KHTML 分支时从 KJS 演变来的）。同时，Chromium port 用 V8 引擎做了替换，还使用了独特的 DOM 绑定来映射上面的组件。
+
+字体和文字渲染是平台上的重要部分。在 WebKit 中有两个独立的文字路径：Fast 和 Complex。这两者都需要平台特性的支持，但是 Fast 只需要知道如何传输字型，而 Complex 实际上需要掌握平台上所有的字符串，并说“请绘制这个吧”。
+
+>"WebKit 就像一个三明治。尽 Chromium 的包装更像是一个墨西哥卷。一个美味的 Web 平台墨西哥卷。"
+—— Dimitri Glazkov, Chrome WebKit hacker，Web Components和 Shadow DOM 拥护者。
+
+现在，让我们放宽镜头看看一些 port 和一些子系统。下面是 WebKit 的 5 个 port；尽管它们共享了 WebCore 的大部分，但考虑一下它们的 stack 有哪些不同。
+
+<table class="table table-bordered table-hover table-striped">
+    <tbody>
+        <tr>
+            <td>&nbsp;</td>
+            <th>Chrome (OS X)</th>
+            <th>Safari (OS X)</th>
+            <th>QtWebKit</th>
+            <th>Android Browser</th>
+            <th>Chrome for iOS</th>
+        </tr>
+        <tr>
+            <th>Rendering</th>
+            <td>Skia</td>
+            <td>CoreGraphics</td>
+            <td>QtGui</td>
+            <td>Android stack/Skia</td>
+            <td>CoreGraphics</td>
+        </tr>
+        <tr>
+            <th>Networking</th>
+            <td>Chromium network stack</td>
+            <td>CFNetwork</td>
+            <td>QtNetwork</td>
+            <td>Fork of Chromium’s network stack</td>
+            <td>Chromium stack</td>
+        </tr>
+        <tr>
+            <th>Fonts</th>
+            <td>CoreText via Skia</td>
+            <td>CoreText</td>
+            <td>Qt internals</td>
+            <td>Android stack</td>
+            <td>CoreText</td>
+        </tr>
+        <tr>
+            <th>JavaScript</th>
+            <td>V8</td>
+            <td>JavaScriptCore</td>
+            <td>JSC (V8 is used elsewhere in Qt)</td>
+            <td>V8</td>
+            <td>JavaScriptCore (without JITting) *</td>
+        </tr>
+    </tbody>
+</table>
+
+*iOS Chrome 注：你可能知道它使用 UIWebView。由于 UIWebView 的能力限制。它只能使用移动版 Safari 的渲染层，JavaScriptCore（而不是 V8）和单进程模式。然而，大量的 Chromium 代码还是起到了调节作用 ，比如网络层、同步、书签架构、地址栏、度量工具和崩溃报告。（同时，由于 JavaScript 很少成为移动端的瓶颈，缺少 JIT 编译器只有很小的影响。）
+
+## 好吧，那么我们该怎么办
+
+现在所有 WebKit 完全不同了，我好怕。
+
+别这样！WebKit 的 layoutTests 覆盖面非常广（据最新统计，有 28,000 个 layoutTests），这些 test 不仅针对已存在的特性，而且针对任何发现的回归。实际上，每当你探索一些新的或难懂的 DOM/CSS/HTML5 特性时，在整个 web 平台上，layoutTests 经常已经有了一些奇妙的小 demo。
+
+另外，W3C 正在努力研究一致性测试套件。这意味着我们可以期待使用同一个测试套件来测试不同的 WebKit port 和浏览器，以此来获得更少的怪异模式，和一个带来更少的怪癖模式和更具互操作性的 web。对所有参加过 Test The Web Forward 活动的人们……致谢！
+
+## Opera 刚刚迁移到了 WebKit 了
+
+Robert Nyman 和 Rob Hawkes也谈到了这个 ，但是我会再补充一些：Opera 在公告中明显指出 Opera 将采用 Chromium。这意味着 WebGL，Canvas，HTML5 表单，2D 图像实现—— Chrome 和 Opera 将在所有这些功能上保持一致。API 和后端实现也会完全相同。由于 Opera 是基于 Chromium，你可以有足够的信心去相信你的尖端工作将会在 Chrome 和 Opera 上获得兼容。
+
+我还应该指出，所有的 Opera 浏览器都将采用 Chromium：包括他的 Windows，Mac、Linux 版本，和 Opera Mobile（完全成熟的移动浏览器）。甚至 Opera Mini 都将使用基于 Chromium 的服务器渲染集群来替换当前的基于 Presto 的服务器端渲染。
+
+## 那 WebKit Nightly 是什么 
+
+它是 WebKit 的 mac port ，和 Safari 运行的二进制文件一样（尽管会替换一些底层库）。因为苹果在项目中起主导地位，所以它的表现和功能与 Safari 的总是那么一致。在很多情况下，当其它 port 可能会试验新功能的时候，Apple 却显得相对保守。不管怎样，如果你想我用中学一样的类比，想想这个好了：WebKit Nightly 对于 Safari 就像 Chromium 对于 Chrome。
+
+同样的，Chrome Canary 有着最新的 WebKit 资源。
+
+告诉我更多的 WebKit 内幕吧。
+
+就在这儿了，小伙子：
+
+<a href="https://docs.google.com/presentation/d/1ZRIQbUKw9Tf077odCh66OrrwRIVNLvI_nhLm2Gi__F0/embed?start=false&amp;loop=false&amp;delayms=3000"> <img src="http://paulirish.com/i/x3fb890.png.pagespeed.ic.6nLbkKT48f.png" alt="" _href="http://paulirish.com/i/x3fb890.png.pagespeed.ic.6nLbkKT48f.png" _p="true"> </a>
+
+## 扩展阅读
+
+* [WebKit internals technical articles | webkit.org](http://www.webkit.org/coding/technical-articles.html)
+
+* [WebKit: An Objective View | Robert Nyman & Rob Hawkes](http://robertnyman.com/2013/02/14/webkit-an-objective-view/) 译者注：InfoQ 发布的[中文译文](http://www.infoq.com/cn/news/2013/02/webkit-history-and-now)
+
+* [your webkit port is special (just like every other port) | Ariya Hidayat](http://ariya.ofilabs.com/2011/06/your-webkit-port-is-special-just-like-every-other-port.html)
+
+* [Getting Started With the WebKit Layout Code | Adobe Web Platform Blog](http://blogs.adobe.com/webplatform/2013/01/21/getting-started-with-the-webkit-layout-code/)
+
+* [WebKit Documentation Overview | Arun Patole](http://arunpatole.com/blog/2011/webkit-documentation/)
+
+* [Rendering in WebKit, by Eric Seidel | YouTube](http://www.youtube.com/watch?v=RVnARGhhs9w)
+
+* [web performance for the curious | Ilya Grigorik](http://www.igvita.com/slides/2012/web-performance-for-the-curious/)
+
+* [WebKit is the jQuery of Browser Engines | John Resig](http://ejohn.org/blog/webkit-is-the-jquery-of-browser-engines/)
+
+* [The Great WebKit Comparison Table | PPK](http://www.quirksmode.org/webkit.html)
