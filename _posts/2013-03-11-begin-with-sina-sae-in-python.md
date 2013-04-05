@@ -528,7 +528,7 @@ sae.const.MYSQL_HOST_S  # 从库域名（只读）
 
 为了让页面看起来更加专业，写起来更容易维护，你也需要学习 Django 的模版知识。
 
-限于篇幅，这两个话题，我会另起文章 [Django 开发入门 搭建环境](http://www.pyivy.com/django/2013/03/11/django-a-blog-in-10-min/) 。
+限于篇幅，这两个话题，我会另起文章 [Django 开发入门 搭建环境](http://www.pyivy.com/django/2013/04/06/django-a-blog-in-10-min/) 。
 
 全文完。
 
