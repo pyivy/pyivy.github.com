@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Upgrade PyQt NoteBook"
+title: "PyQt 升级笔记"
 description: "<p>昨天下午，Bingal 发给我一个小程序，PyQt 编写的网页测试工具，支持 Retina 显示，比我之前 Hello World 的那些小对话框，效果要好上不少。于是我问，他用的是什么版本，他告诉我是最新的 5.0.1，并发来了链接。</p><p>打开 Qt 官网，发现已经升级至 5.0.2 了，心中窃喜，难道是因为新的 Qt 版本，实现了对 Retina 的支持？虽然眼看将要下班，还是忍不住升级。</p>"
 category: pyqt
 tags: [python, pyqt]
