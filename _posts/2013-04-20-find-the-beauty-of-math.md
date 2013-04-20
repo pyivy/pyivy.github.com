@@ -23,7 +23,7 @@ tags: [math, gcd]
 
 如果是纸上运算，我们最先想到的方法，就是短除法，简单，有效。倘若你喜欢分解质因数，也行，但是分解质因数不用短除法，也不简单。
 
-关于短除法，[这里](http://www.slideshare.net/bruno921/ss-14819754)有一个 Presentation，台湾老师的作品，相当不错，如果你没有梯子，可以看我复制的 [PDF](/assets/images/2013/02/short-division.pdf) 版本。
+关于短除法，[这里](http://www.slideshare.net/bruno921/ss-14819754)有一个 Presentation，台湾老师的作品，相当不错，如果你没有梯子，可以看我复制的 [PDF](/assets/images/2013/02/short-division.pdf) 版本（5.6 M）。
 
 两个数的最大公数和最小公倍数，相对比较好计算，三个数呢？
 
