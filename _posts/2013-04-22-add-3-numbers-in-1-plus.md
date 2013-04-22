@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "如何只用一个加号计算三个数之和"
+title: "只用一个加号为三个数求和"
 description: "<p>这是在 <a href='http://segmentfault.com/q/1010000000186540'>SegmentFault</a> 上看到的一个问题，小时也经常玩类似的游戏，比如，如何只移动一根火柴，使等式成立？</p><p>具体请 Google。</p><p><img src='/assets/images/2013/02/match.jpg' alt='火柴'></p><p>我学编程，是直接从 JSP 入手的，从未接受过位运算的训练，今天开眼界了。</p>"
 category: program
 tags: [plus, python, ipython]
