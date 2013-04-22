@@ -43,7 +43,7 @@ In [20]: int(0b110)
 Out[20]: 6
 ```
 
-除了内置算法，还有网友分享的自定义算法：
+除了内置算法，还有[网友](http://my.csdn.net/panghuhu250)分享的自定义算法：
 
 ```python
 # -*- coding:utf-8 -*-
