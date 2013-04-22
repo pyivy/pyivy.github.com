@@ -50,4 +50,47 @@ In [20]: int(0b110)
 Out[20]: 6
 ```
 
+除了内置算法，还有网友分享的自定义算法：
+
+```python
+# -*- coding:utf-8 -*-
+
+def bin2dec(s):
+    total = 0
+    for i in s:
+        total = 2 * total + (0 if i == '0' else 1)
+    return total
+
+
+def bin2dec2(bin):
+    count = 0
+    for i in range(0, len(bin)):
+        if bin[i] == str(1):
+            sum = 2 ** (len(bin) - i - 1)
+            count += sum
+    return count
+
+a = '10000000000'
+
+print(bin2dec(a))
+print(bin2dec2(a))
+```
+
+其它进制：
+
+```python
+x = bin(1024)
+print 'bin:', x
+ 
+x = oct(1024)
+print 'oct:', x
+ 
+x = hex(1024)
+print 'hex:', x
+ 
+bin: 0b10000000000
+oct: 02000
+hex: 0x400
+```
+
 学无止境。
