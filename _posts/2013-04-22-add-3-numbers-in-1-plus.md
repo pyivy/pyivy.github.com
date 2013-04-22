@@ -82,20 +82,18 @@ print(bin2dec2(a))
 In [51]: a = '101010101010111'
 
 In [52]: def bin2dec(s):
-        total = 0
-        for i in s:
-                total = 2 * total + (0 if i == '0' else 1)
-        return total
-   ....:     
-
+    ...:     total = 0
+    ...:     for i in s:
+    ...:         total = 2*total + (0 if i=='0' else 1)
+    ...:     return total
+ 
 In [53]: def bin2dec2(bin):
-        count = 0
-        for i in range(0, len(bin)):
-                if bin[i] == str(1):
-                        sum = 2 ** (len(bin) - i - 1)
-                        count += sum
-        return count
-   ....:     
+    ...:     count = 0
+    ...:     for i in range(0,len(bin)):
+    ...:         if bin[i] == str(1):
+    ...:             sum=2**(len(bin)-i-1)
+    ...:             count += sum
+    ...:     return count    
 
 In [54]: %timeit int(a, 2)
 1000000 loops, best of 3: 347 ns per loop
